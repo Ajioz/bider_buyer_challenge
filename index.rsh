@@ -7,25 +7,17 @@ const Members = {
 
 export const main = Reach.App(() => {
 
-  const Pat = Participant('Pat', {
-    ...Members
-  });
+  const Pat = Participant('Pat', { ...Members });
 
-  const Vanna = Participant('Vanna', {
-    ...Members
-  });
+  const Vanna = Participant('Vanna', { ...Members });
 
   init();
 
-  Pat.only(() => {
-    const challengePat = declassify(interact.getChallenge())
-  })
+  Pat.only(() => { const challengePat = declassify(interact.getChallenge()) })
   Pat.publish(challengePat);
   commit();
 
-  Vanna.only(() => {
-    const challengeVanna = declassify(interact.getChallenge())
-  })
+  Vanna.only(() => { const challengeVanna = declassify(interact.getChallenge()) })
   Vanna.publish(challengeVanna);
 
   const outcome = (challengePat + (4 - challengeVanna)) % 3;

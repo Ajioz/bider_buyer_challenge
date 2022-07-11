@@ -16,7 +16,8 @@ export const main = Reach.App(()=>{
     })
 
     const Buyer = Participant('Buyer', {
-        ...Transaction
+        ...Transaction,
+        payment: UInt
     })
     init()
 
@@ -27,15 +28,9 @@ export const main = Reach.App(()=>{
     commit();
 
     Buyer.only(()=>{
+        payment = declassify(interact.payment)
         const description = declassify(interact.getDescription(10))
     })
-    Buyer.publish(description);
+    Buyer.publish(payment, description).pay(payment);
     commit();
-    
-    const result = description
-
-    // each([Bidder, Buyer], () => {
-    //     interact.seePrice()
-    // });
-
 })
